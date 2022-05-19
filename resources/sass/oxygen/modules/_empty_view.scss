@@ -1,0 +1,25 @@
+@import "../_brand-variables";
+
+// empty view styles
+.empty-view {
+    text-align: center;
+    margin: 20px 0;
+    border: 1px solid $internal-border-color;
+    padding: 50px 0;
+
+    .hero-image {
+        .fa {
+            font-size: 100px;
+            color: $internal-border-color;
+        }
+    }
+
+    h3 {
+        color: #ccc;
+        margin-top: 0;
+    }
+
+    .action-buttons {
+        margin-top: 40px;
+    }
+}

@@ -1,0 +1,28 @@
+@import "../_brand-variables";
+
+.input-fields--medium {
+    .btn {
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.4285;
+        min-height: 34px;
+    }
+
+    .form-control {
+        min-height: 32px;
+        font-size: 14px;
+        line-height: 1.4285;
+    }
+
+    select {
+        &.form-control {
+            height: 32px;
+        }
+    }
+
+    .label {
+        font-size: 12px;
+        padding: 5px 15px;
+    }
+}
+

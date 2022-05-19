@@ -1,0 +1,41 @@
+@import "../_brand-variables";
+@import "../_abstract-classes";
+
+.form {
+    &-inline {
+        display: inline-block;
+    }
+}
+
+.js-datepicker-wrapper {
+    position: relative;
+}
+
+.form-input-number {
+    width: 50px;
+    text-align: right;
+    display: inline;
+}
+
+.input-number-group {
+    float: right;
+
+    .form-input-number {
+        @extend .form-input-number;
+        float: left;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .input-group-btn {
+        float: left;
+    }
+}
+
+.inline-control {
+    display: inline;
+}
+
+.spaced-label {
+    line-height: 34px;
+}

@@ -1,0 +1,42 @@
+@import "../_abstract-classes";
+
+$form-font-color: #48576a;
+
+.form-elegant-container {
+    border: 1px solid #eaeefb;
+    border-radius: 4px;
+    transition: 0.2s;
+    padding: 20px;
+}
+
+.form-elegant {
+    color: $form-font-color;
+
+    label {
+        font-weight: normal;
+    }
+
+    .form-control {
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #bfcbd9;
+        color: #1f2d3d;
+        display: block;
+        font-size: inherit;
+        //height: 36px;
+        line-height: 1;
+        outline: none;
+        padding: 3px 10px;
+        transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        box-shadow: none;
+    }
+
+    .form-control-inline {
+        display: inline-block;
+    }
+
+    .number-field {
+        max-width: 65px;
+        text-align: right;
+    }
+}

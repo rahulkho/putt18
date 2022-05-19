@@ -1,0 +1,54 @@
+@import "../_brand-variables";
+@import "../_abstract-classes";
+
+.comments-block {
+    textarea {
+        font-size: 16px;
+    }
+
+    //.comments {
+    //padding-left: 45px;
+    //padding-right: 15px;
+    .comment {
+        border: 1px solid $internal-border-color;
+        //	  padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background: white;
+    }
+
+    .comment-heading {
+        font-weight: bold;
+        background: #FCFCFC;
+        padding: 10px 10px 10px;
+
+        .text-muted {
+            font-weight: normal;
+            margin-left: 5px;
+        }
+    }
+
+    .user-name {
+        color: #838383;
+    }
+
+    .comment-contents {
+        padding: 10px;
+    }
+
+    .comment-new {
+        margin-bottom: 10px;
+
+        textarea {
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 32px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    }
+
+    // }
+}

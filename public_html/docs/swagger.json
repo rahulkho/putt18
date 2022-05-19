@@ -1,0 +1,1665 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Putt18 Backend API",
+        "version": "1.0.0"
+    },
+    "host": "putt18.devv",
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "basePath": "\/api\/v1",
+    "paths": {
+        "\/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "This endpoint registers a user. If you need to update a profile image, upload the profile image in the background using `\/avatar` endpoint.",
+                "parameters": [
+                    {
+                        "name": "device_id",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Unique ID of the device",
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_type",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Type of the device `APPLE` or `ANDROID`",
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_push_token",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Unique push token for the device",
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "formData",
+                        "required": true,
+                        "description": "First name of user",
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Last name of user",
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Email address of user",
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Phone number in international format",
+                        "type": "string"
+                    },
+                    {
+                        "name": "date_of_birth",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Date of birth in YYYY\/MM\/DD format",
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Password. Must be at least 8 characters.",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "device_id",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Unique ID of the device",
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_type",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Type of the device `APPLE` or `ANDROID`",
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_push_token",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Unique push token for the device",
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Email",
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Password",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/AuthLoginResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/password\/email": {
+            "post": {
+                "tags": [
+                    "ForgotPassword"
+                ],
+                "summary": "Reset Password",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Email",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/guests": {
+            "get": {
+                "tags": [
+                    "Guest"
+                ],
+                "summary": "Search Guest",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Guest settings and parameters",
+                "parameters": [],
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/faqs": {
+            "get": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "FAQs",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "FAQs and answers",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": true,
+                        "description": "Page number",
+                        "type": "integer"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/FAQsFAQsResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Logout the user from current device",
+                "parameters": [],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/profile": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "My Profile",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Get currently logged in user's profile",
+                "parameters": [],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ProfileMyProfileResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Update My Profile",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "first_name",
+                        "in": "formData",
+                        "required": true,
+                        "description": "First name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Last name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Email",
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Phone",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ProfileUpdateMyProfileResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/avatar": {
+            "post": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Update My Avatar",
+                "consumes": [
+                    "multipart\/form-data"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Image",
+                        "type": "file"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ProfileUpdateMyAvatarResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/password\/edit": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Update Password",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Password",
+                        "type": "string"
+                    },
+                    {
+                        "name": "current_password",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Current password",
+                        "type": "string"
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Password confirmation",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/claim-order": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Claim an Order",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Claim an order ID and become a premium user",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Order ID to claim",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/games": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "List Games",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "p",
+                        "in": "query",
+                        "required": false,
+                        "description": "Page number. Default will be 1",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "description": "Accepted values `active`. Default is `all`",
+                        "type": "string"
+                    },
+                    {
+                        "name": "game_type",
+                        "in": "query",
+                        "required": false,
+                        "description": "Accepted values `hole-18`, `hole-9`",
+                        "type": "string"
+                    },
+                    {
+                        "name": "play_type",
+                        "in": "query",
+                        "required": false,
+                        "description": "Accepted values `single`, `team`",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Create Game",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Date in DD\/Mon\/YYYY format",
+                        "type": "string"
+                    },
+                    {
+                        "name": "time",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Time in HH:MM AA format",
+                        "type": "string"
+                    },
+                    {
+                        "name": "formatted_address",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Displayed name of the venue",
+                        "type": "string"
+                    },
+                    {
+                        "name": "street",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Address line 1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "street_2",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Address line 2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Time in HH:MM AA format",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Time in HH:MM AA format",
+                        "type": "string"
+                    },
+                    {
+                        "name": "country",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Name of country",
+                        "type": "string"
+                    },
+                    {
+                        "name": "country_iso_code",
+                        "in": "formData",
+                        "required": true,
+                        "description": "ISO code of venue country",
+                        "type": "string"
+                    },
+                    {
+                        "name": "game_type",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Accepted values `hole-18`, `hole-9`",
+                        "type": "string"
+                    },
+                    {
+                        "name": "play_type",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Accepted values `single`, `team`",
+                        "type": "string"
+                    },
+                    {
+                        "name": "game_max_player_limit",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Total players for game",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "team_max_player_limit",
+                        "in": "formData",
+                        "required": false,
+                        "description": "Required for `team` games",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "player_order",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Accepted values `auto`, `manual`",
+                        "type": "string"
+                    },
+                    {
+                        "name": "has_wildcards",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Accepted values `true`, `false`",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "has_animations",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Accepted values `true`, `false`",
+                        "type": "boolean"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/GamesCreateGameResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        },
+        "\/leaderboard": {
+            "get": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Get Rankings",
+                "consumes": [
+                    "application\/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "p",
+                        "in": "query",
+                        "required": false,
+                        "description": "Page number. Default will be 1",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "country_code",
+                        "in": "query",
+                        "required": false,
+                        "description": "ISO Country code",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "required": false,
+                        "description": "State",
+                        "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apiKey": []
+                    },
+                    {
+                        "accessToken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#\/definitions\/SuccessResponse"
+                        },
+                        "description": "Success response"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorUnauthorized"
+                        },
+                        "description": "Authentication failed"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiErrorAccessDenied"
+                        },
+                        "description": "Access denied"
+                    },
+                    "422": {
+                        "schema": {
+                            "$ref": "#\/definitions\/ApiError"
+                        },
+                        "description": "Generic API error. Check `message` for more information."
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "apiKey": {
+            "type": "apiKey",
+            "name": "x-api-key",
+            "in": "header"
+        },
+        "accessToken": {
+            "type": "apiKey",
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Unique user authentication token"
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "email_verified_at": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "remember_token": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "disabled_at": {
+                    "type": "string"
+                },
+                "disabled_by_user_id": {
+                    "type": "integer"
+                },
+                "email_confirmation_sent_at": {
+                    "type": "string"
+                },
+                "email_confirmed_at": {
+                    "type": "string"
+                },
+                "confirmation_code": {
+                    "type": "string"
+                },
+                "avatar_url": {
+                    "type": "string"
+                },
+                "avatar_path": {
+                    "type": "string"
+                },
+                "avatar_disk": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "deleted_by_user_id": {
+                    "type": "integer"
+                },
+                "timezone": {
+                    "type": "string"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "became_premium_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "PushNotification": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "badge_count": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "scheduled_at": {
+                    "type": "string"
+                },
+                "scheduled_timezone": {
+                    "type": "string"
+                },
+                "sent_at": {
+                    "type": "string"
+                },
+                "read_at": {
+                    "type": "string"
+                },
+                "notifiable_type": {
+                    "type": "string"
+                },
+                "notifiable_id": {
+                    "type": "string"
+                },
+                "topic": {
+                    "type": "string"
+                },
+                "apns_config": {
+                    "type": "string"
+                },
+                "android_config": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "Device": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "device_id": {
+                    "type": "string"
+                },
+                "device_type": {
+                    "type": "string"
+                },
+                "device_push_token": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "access_token": {
+                    "type": "string"
+                },
+                "access_token_expires_at": {
+                    "type": "string"
+                },
+                "latest_ip_address": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "is_subscribed_to_all_devices_topic": {
+                    "type": "boolean"
+                },
+                "is_subscribed_to_device_type_topic": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Order": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "is_claimed": {
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "Game": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "long_name": {
+                    "type": "string"
+                },
+                "venue": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "formatted_address": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "street_2": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "state_iso_code": {
+                    "type": "string"
+                },
+                "zip": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "country_iso_code": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "phone_iso": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                },
+                "location_type": {
+                    "type": "string"
+                },
+                "game_type": {
+                    "type": "string"
+                },
+                "play_type": {
+                    "type": "string"
+                },
+                "player_order": {
+                    "type": "string"
+                },
+                "has_wildcards": {
+                    "type": "boolean"
+                },
+                "has_animations": {
+                    "type": "boolean"
+                },
+                "team_max_player_limit": {
+                    "type": "integer"
+                },
+                "game_max_player_limit": {
+                    "type": "integer"
+                },
+                "starts_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "Ranking": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "player_id": {
+                    "type": "string"
+                },
+                "movement": {
+                    "type": "integer"
+                },
+                "last_updated_at": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "PlayType": {
+            "type": "object",
+            "properties": []
+        },
+        "Player": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "guest_name": {
+                    "type": "string"
+                },
+                "guest_email": {
+                    "type": "string"
+                },
+                "guest_phone_iso": {
+                    "type": "string"
+                },
+                "guest_invite_code": {
+                    "type": "string"
+                },
+                "guiest_invite_expires_at": {
+                    "type": "string"
+                },
+                "match_count": {
+                    "type": "integer"
+                },
+                "lowest_score": {
+                    "type": "integer"
+                },
+                "average_score": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "GameType": {
+            "type": "object",
+            "properties": []
+        },
+        "Faq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "question": {
+                    "type": "string"
+                },
+                "answer": {
+                    "type": "string"
+                },
+                "sort_order": {
+                    "type": "integer"
+                },
+                "is_enabled": {
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "Team": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "game_id": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "File": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "original_filename": {
+                    "type": "string"
+                },
+                "public_url": {
+                    "type": "string"
+                },
+                "permalink": {
+                    "type": "string"
+                }
+            }
+        },
+        "SuccessResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "type": "object"
+                }
+            }
+        },
+        "Paginator": {
+            "type": "object",
+            "properties": {
+                "current_page": {
+                    "type": "number"
+                },
+                "per_page": {
+                    "type": "number",
+                    "default": 50
+                },
+                "to": {
+                    "type": "number"
+                }
+            }
+        },
+        "ApiErrorUnauthorized": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "type": "object"
+                }
+            }
+        },
+        "ApiErrorAccessDenied": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "type": "object"
+                }
+            }
+        },
+        "ApiError": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "type": "object"
+                }
+            }
+        },
+        "AuthLoginResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "$ref": "#\/definitions\/User"
+                }
+            }
+        },
+        "FAQsFAQsResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#\/definitions\/Faq"
+                    }
+                },
+                "paginator": {
+                    "$ref": "#\/definitions\/Paginator"
+                }
+            }
+        },
+        "ProfileMyProfileResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "$ref": "#\/definitions\/User"
+                }
+            }
+        },
+        "ProfileUpdateMyProfileResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "$ref": "#\/definitions\/User"
+                }
+            }
+        },
+        "ProfileUpdateMyAvatarResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "$ref": "#\/definitions\/User"
+                }
+            }
+        },
+        "GamesCreateGameResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "payload": {
+                    "$ref": "#\/definitions\/Game"
+                }
+            }
+        }
+    }
+}

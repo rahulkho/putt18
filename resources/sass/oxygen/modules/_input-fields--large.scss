@@ -1,0 +1,54 @@
+@import "../_brand-variables";
+
+.input-fields--large {
+    .btn {
+        min-height: 52px;
+        font-size: 22px;
+        padding-left: 20px;
+        padding-right: 20px;
+        line-height: 35px;
+    }
+
+    .label {
+        font-size: 12px;
+        padding: 5px 15px;
+    }
+
+    .form-control {
+        box-shadow: none;
+        border: 1px solid $internal-border-color;
+        color: $brand-font-color-third;
+        min-height: 52px;
+        // padding: 25px 15px;
+        font-size: 22px;
+    }
+
+    select.form-control {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .form-group {
+        margin-top: 35px;
+
+        label {
+            font-size: 18px;
+            color: $brand-font-color-second;
+        }
+    }
+
+    .form label {
+        color: $brand-font-color-second;
+    }
+
+    .input-group-btn > .btn {
+        padding: 15px 30px;
+    }
+
+    .form-horizontal {
+        .control-label {
+            padding-top: 14px;
+        }
+    }
+}
+

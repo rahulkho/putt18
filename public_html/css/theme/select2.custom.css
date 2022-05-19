@@ -1,0 +1,35 @@
+.multi-select-wrapper .select2-container {
+	display: block;
+}
+.select2-container--default .select2-selection--multiple {
+	border: 1px solid #eaeaea;
+	height: 50px;
+}
+.multi-select-wrapper .select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background-color: #8ECE9F;
+	border: 1px solid #098602;
+	color: #fff;
+	padding: 8px 10px;
+	font-size: 14px;
+}
+.multi-select-wrapper .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+	color: #F1F1F1;
+	font-weight: bold;
+	margin-right: 5px;
+}
+.multi-select-wrapper .error {
+	font-size: 16px;
+	background: #FFF1F1;
+	padding: 2px 11px;
+	border-radius: 5px;
+	border: 1px solid #FFCFCF;
+}
+
+#modalErrorMessage {
+	display: none;
+	margin-bottom: 0px;
+}
+
+#loadingIndicator {
+	display: none;
+}

@@ -1,0 +1,29 @@
+@import "./brand-variables";
+
+/*
+|--------------------------------------------------------------------------
+| Define the Base CSS classes to be extended
+|--------------------------------------------------------------------------
+|
+*/
+
+$spacing: 10px;
+
+.smooth-font {
+    -webkit-font-smoothing: antialiased;
+}
+
+.narrow-font {
+    font-weight: 300;
+    @extend .smooth-font;
+}
+
+.space-bottom {
+    margin-bottom: $spacing;
+}
+
+.space-top {
+    margin-top: $spacing;
+}
+
+

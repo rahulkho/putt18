@@ -1,0 +1,36 @@
+@import "./oxygen/_brand-variables";
+
+$header-color: #fff;
+
+html, body.master-auth {
+    height: 100%;
+}
+
+body {
+    background-color: #f5f8fa;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-default {
+    background-color: $header-color;
+    font-family: $dashboard-font;
+}
+
+.panel-default {
+    > .panel-heading {
+        background-color: $header-color;
+        font-family: $dashboard-font;
+    }
+}
+
+h3 {
+    font-family: $dashboard-font;
+}
+
+.navbar-app {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
